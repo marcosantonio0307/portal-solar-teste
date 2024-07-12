@@ -10,6 +10,8 @@ gem 'pg'
 gem 'faraday'
 gem 'rswag-api'
 gem 'rswag-ui'
+gem 'devise_token_auth'
+
 
 gem 'bootsnap', '>= 1.4.4', require: false
 
