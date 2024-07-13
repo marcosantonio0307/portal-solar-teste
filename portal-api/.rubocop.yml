@@ -1,0 +1,41 @@
+require: rubocop-rails
+AllCops:
+  TargetRubyVersion: 2.7.2
+  Exclude:
+    - 'lib/tasks/**/*'
+    - 'bin/**/*'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'spec/*'
+    - 'config.ru'
+    - 'Rakefile'
+    - 'Gemfile'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
+Metrics/MethodLength:
+  Max: 20
+  Exclude:
+    - 'spec/**/*'
+
+Metrics/AbcSize:
+  Max: 32
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
+
+Style/IfUnlessModifier:
+  Exclude:
+    - 'bin/bundle'
+
+Layout/LineLength:
+  Max: 120
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+  

@@ -1,0 +1,160 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/customer":
+    post:
+      summary: Creates a customer
+      tags:
+      - Customers
+      parameters: []
+      responses:
+        '200':
+          description: customer created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - name
+              - email
+              - password
+    delete:
+      summary: Deletes a Customer
+      tags:
+      - Customers
+      security:
+      - auth_token: []
+      responses:
+        '200':
+          description: customer deleted
+        '404':
+          description: customer not found
+  "/api/v1/customer/sign_in":
+    post:
+      summary: Sign in a customer
+      tags:
+      - Customers
+      parameters: []
+      responses:
+        '200':
+          description: customer signed in
+        '401':
+          description: invalid credentials
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - email
+              - password
+  "/api/v1/customers/{id}":
+    get:
+      summary: Retrieves a customer
+      tags:
+      - Customers
+      security:
+      - auth_token: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: customer found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  email:
+                    type: string
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+        '404':
+          description: customer not found
+        '401':
+          description: unauthorized
+    put:
+      summary: Updates a customer
+      tags:
+      - Customers
+      security:
+      - auth_token: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: customer updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  email:
+                    type: string
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+        '422':
+          description: invalid request
+        '404':
+          description: customer not found
+        '401':
+          description: unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+components:
+  securitySchemes:
+    auth_token:
+      type: apiKey
+      name: Authorization
+      in: header
+servers:
+- url: http://localhost:3000
+  variables:
+    defaultHost:
+      default: localhost:3000
