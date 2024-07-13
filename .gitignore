@@ -3,8 +3,8 @@
 ./portal-api/db/*.sqlite3
 ./portal-api/db/*.sqlite3-*
 
-./portal-api/log/*
-./portal-api/tmp/*
+/portal-api/log/*
+/portal-api/tmp/*
 ./portal-api/!/log/.keep
 ./portal-api/!/tmp/.keep
 
