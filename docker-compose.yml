@@ -1,6 +1,6 @@
 services:
   app:
-    env_file: '.env'
+    env_file: '.env.development'
     build: ./portal-api
     stdin_open: true
     tty: true
@@ -14,7 +14,7 @@ services:
 
   db:
     image: postgres:16.0
-    env_file: '.env'
+    env_file: '.env.development'
     ports:
       - '5432:5444'
     volumes:
