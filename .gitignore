@@ -1,26 +1,14 @@
 ./portal-api/.bundle
 
-./portal-api/db/*.sqlite3
-./portal-api/db/*.sqlite3-*
+/portal-api/db/*.sqlite3
+/portal-api/db/*.sqlite3-*
 
 /portal-api/log/*
 /portal-api/tmp/*
-./portal-api/!/log/.keep
-./portal-api/!/tmp/.keep
 
-./portal-api/tmp/pids/*
-./portal-api/!/tmp/pids/
-./portal-api/!/tmp/pids/.keep
+/portal-api/storage/*
 
-./portal-api/storage/*
-./portal-api/!/storage/.keep
+/portal-api/public/assets
+/portal-api/.byebug_history
 
-./portal-api/public/assets
-./portal-api/.byebug_history
-
-./portal-api/config/master.key
-
-./portal-api/public/packs
-./portal-api/public/packs-test
-./portal-api/node_modules
-./portal-api/public/
+/portal-api/config/master.key
