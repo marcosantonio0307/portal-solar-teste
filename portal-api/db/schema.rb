@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_07_12_160234) do
+ActiveRecord::Schema.define(version: 2024_07_13_192933) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,4 +40,14 @@ ActiveRecord::Schema.define(version: 2024_07_12_160234) do
     t.index ["uid", "provider"], name: "index_customers_on_uid_and_provider", unique: true
   end
 
+  create_table "simulations", force: :cascade do |t|
+    t.bigint "customer_id", null: false
+    t.float "electricity_bill", null: false
+    t.float "power"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_simulations_on_customer_id"
+  end
+
+  add_foreign_key "simulations", "customers"
 end

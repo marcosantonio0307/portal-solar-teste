@@ -8,4 +8,6 @@ class Customer < ApplicationRecord
   include DeviseTokenAuth::Concerns::User
 
   validates :name, presence: true
+
+  has_many :simulations, dependent: :destroy
 end

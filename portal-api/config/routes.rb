@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :customers, only: %i[show update]
+
+      resources :simulations, only: %i[create]
     end
   end
 end
