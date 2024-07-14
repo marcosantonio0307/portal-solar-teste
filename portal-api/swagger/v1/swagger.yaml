@@ -147,6 +147,49 @@ paths:
                   type: string
                 email:
                   type: string
+  "/api/v1/simulations":
+    post:
+      summary: Creates a simulation
+      tags:
+      - Simulations
+      security:
+      - auth_token: []
+      parameters: []
+      responses:
+        '200':
+          description: simulation created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  simulation:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      customer_id:
+                        type: integer
+                      electricity_bill:
+                        type: number
+                      power:
+                        type: number
+                      created_at:
+                        type: string
+                      updated_at:
+                        type: string
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                electricity_bill:
+                  type: float
+              required:
+              - electricity_bill
 components:
   securitySchemes:
     auth_token:
