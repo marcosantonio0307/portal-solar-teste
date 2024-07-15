@@ -5,17 +5,20 @@ services:
     stdin_open: true
     tty: true
     ports:
-      - 3000:3000
+      - 3001:3001
     volumes:
       - ./portal-api:/app
     depends_on:
       - db
-    command: bash -c 'rails s -b 0.0.0.0'
+    command: bash -c 'rails s -b 0.0.0.0 -p 3001'
 
   db:
     image: postgres:16.0
     env_file: '.env.development'
     ports:
-      - '5432:5444'
+      - '5432:5432'
     volumes:
-      - /postgres-data:/var/lib/postgresql@16/data
+      - db_volume:/var/lib/postgresql/data
+
+volumes:
+  db_volume:
