@@ -17,7 +17,7 @@ Rails.application.routes.draw do
       resources :simulations, only: %i[index create show]
 
       namespace :internal do
-        resources :simulations, only: %i[index]
+        resources :simulations, only: %i[index show]
       end
     end
   end

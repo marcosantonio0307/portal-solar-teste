@@ -30,7 +30,8 @@ describe 'Internal Simulations API' do
                   electricity_bill: { type: :number },
                   power: { type: :number },
                   created_at: { type: :string },
-                  updated_at: { type: :string }
+                  updated_at: { type: :string },
+                  self_link: { type: :string }
                 }
               }
             }
@@ -44,6 +45,50 @@ describe 'Internal Simulations API' do
 
       response '401', 'unauthorized' do
         let('Api-Internal-Key') { 'invalid' }
+
+        run_test!
+      end
+    end
+  end
+
+  path '/api/v1/internal/simulations/{id}' do
+    get 'Retrieves a simulation' do
+      tags 'Internal Simulations'
+      produces 'application/json'
+      security [internal_key: []]
+
+      parameter name: :id, in: :path, type: :integer
+      parameter name: 'Api-Internal-Key', in: :header, type: :string
+
+      let(:internal_key) { ENV['API_INTERNAL_KEY'] }
+      let('Api-Internal-Key') { internal_key }
+      let(:simulation) { create(:simulation) }
+      let(:id) { simulation.id }
+
+      response '200', 'simulation found' do
+        schema(
+          type: :object,
+          properties: {
+            id: { type: :integer },
+            customer_id: { type: :integer },
+            electricity_bill: { type: :number },
+            power: { type: :number },
+            created_at: { type: :string },
+            updated_at: { type: :string }
+          }
+        )
+
+        run_test!
+      end
+
+      response '401', 'unauthorized' do
+        let('Api-Internal-Key') { 'invalid' }
+
+        run_test!
+      end
+
+      response '404', 'simulation not found' do
+        let(:id) { 'invalid' }
 
         run_test!
       end

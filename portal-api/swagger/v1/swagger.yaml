@@ -190,8 +190,51 @@ paths:
                           type: string
                         updated_at:
                           type: string
+                        self_link:
+                          type: string
         '401':
           description: unauthorized
+  "/api/v1/internal/simulations/{id}":
+    get:
+      summary: Retrieves a simulation
+      tags:
+      - Internal Simulations
+      security:
+      - internal_key: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: Api-Internal-Key
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: simulation found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  customer_id:
+                    type: integer
+                  electricity_bill:
+                    type: number
+                  power:
+                    type: number
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+        '401':
+          description: unauthorized
+        '404':
+          description: simulation not found
   "/api/v1/simulations":
     get:
       summary: Retrieves simulations
