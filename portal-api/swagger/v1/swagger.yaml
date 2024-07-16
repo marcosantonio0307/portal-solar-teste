@@ -97,8 +97,6 @@ paths:
                     type: string
                   updated_at:
                     type: string
-        '404':
-          description: customer not found
         '401':
           description: unauthorized
     put:
@@ -133,8 +131,6 @@ paths:
                     type: string
         '422':
           description: invalid request
-        '404':
-          description: customer not found
         '401':
           description: unauthorized
       requestBody:
@@ -148,6 +144,64 @@ paths:
                 email:
                   type: string
   "/api/v1/simulations":
+    get:
+      summary: Retrieves simulations
+      tags:
+      - Customers
+      security:
+      - auth_token: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: customer simulations found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  simulations:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        customer_id:
+                          type: integer
+                        electricity_bill:
+                          type: number
+                        power:
+                          type: number
+                        created_at:
+                          type: string
+                        updated_at:
+                          type: string
+                        self_link:
+                          type: string
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                      total_pages:
+                        type: integer
+        '401':
+          description: unauthorized
     post:
       summary: Creates a simulation
       tags:
@@ -178,6 +232,8 @@ paths:
                         type: string
                       updated_at:
                         type: string
+                      self_link:
+                        type: string
         '422':
           description: invalid request
       requestBody:
@@ -190,6 +246,48 @@ paths:
                   type: float
               required:
               - electricity_bill
+  "/api/v1/simulations/{id}":
+    get:
+      summary: Retrieves a simulation
+      tags:
+      - Simulations
+      security:
+      - auth_token: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: simulation found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  simulation:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      customer_id:
+                        type: integer
+                      electricity_bill:
+                        type: number
+                      power:
+                        type: number
+                      created_at:
+                        type: string
+                      updated_at:
+                        type: string
+                      self_link:
+                        type: string
+        '404':
+          description: simulation not found
+        '401':
+          description: unauthorized
 components:
   securitySchemes:
     auth_token:

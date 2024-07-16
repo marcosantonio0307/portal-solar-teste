@@ -14,6 +14,7 @@ gem 'devise'
 gem 'devise_token_auth'
 gem 'jbuilder'
 gem 'rack-cors'
+gem 'will_paginate'
 
 gem 'bootsnap', '>= 1.4.4', require: false
 

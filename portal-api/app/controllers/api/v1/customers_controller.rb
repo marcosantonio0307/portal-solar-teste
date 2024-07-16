@@ -15,7 +15,7 @@ module Api
       private
 
       def customer
-        @customer ||= Customer.find(params[:id])
+        @customer ||= current_customer
       end
 
       def permitted_params

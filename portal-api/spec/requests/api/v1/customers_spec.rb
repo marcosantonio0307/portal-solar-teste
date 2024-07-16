@@ -173,12 +173,6 @@ describe 'Customers API' do
         run_test!
       end
 
-      response '404', 'customer not found' do
-        let(:id) { 123 }
-
-        run_test!
-      end
-
       response '401', 'unauthorized' do
         let('Authorization') { 'invalid' }
 
@@ -243,12 +237,6 @@ describe 'Customers API' do
 
           run_test!
         end
-      end
-
-      response '404', 'customer not found' do
-        let(:id) { 123 }
-
-        run_test!
       end
 
       response '401', 'unauthorized' do
