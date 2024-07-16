@@ -143,6 +143,55 @@ paths:
                   type: string
                 email:
                   type: string
+  "/api/v1/internal/simulations":
+    get:
+      summary: Retrieves simulations
+      tags:
+      - Internal Simulations
+      security:
+      - internal_key: []
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: Api-Internal-Key
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: simulations found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  simulations:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        customer_id:
+                          type: integer
+                        electricity_bill:
+                          type: number
+                        power:
+                          type: number
+                        created_at:
+                          type: string
+                        updated_at:
+                          type: string
+        '401':
+          description: unauthorized
   "/api/v1/simulations":
     get:
       summary: Retrieves simulations

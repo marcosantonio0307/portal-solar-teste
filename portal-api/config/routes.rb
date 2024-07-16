@@ -15,6 +15,10 @@ Rails.application.routes.draw do
       resources :customers, only: %i[show update]
 
       resources :simulations, only: %i[index create show]
+
+      namespace :internal do
+        resources :simulations, only: %i[index]
+      end
     end
   end
 end

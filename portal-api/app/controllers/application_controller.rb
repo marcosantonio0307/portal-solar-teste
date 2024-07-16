@@ -16,6 +16,14 @@ class ApplicationController < ActionController::API
     render json: { error: exception.message }, status: :unprocessable_entity
   end
 
+  def not_authorized
+    render json: { error: 'Unauthorized' }, status: :unauthorized
+  end
+
+  def authenticate_internal_key
+    not_authorized unless request.headers['Api-Internal-Key'] == ENV['API_INTERNAL_KEY']
+  end
+
   protected
 
   def configure_permitted_parameters
