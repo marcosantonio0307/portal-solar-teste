@@ -5,12 +5,12 @@ class PortalSolarGateway
   KEY = ENV.fetch('PORTAL_SOLAR_KEY')
 
   class << self
-    def find_generators(power:, adapter: HttpAdapter)
+    def get_generators(page: 1, page_size: 5, adapter: HttpAdapter)
       adapter.get(
         url: HOST,
-        path: "/geradores?key=#{KEY}&potencia=#{power}",
+        path: "/geradores?key=#{KEY}&page=#{page}&page_size=#{page_size}",
         headers: {}
-      ).body
+      )
     rescue Faraday::Error => e
       Rails.logger.error(e)
 

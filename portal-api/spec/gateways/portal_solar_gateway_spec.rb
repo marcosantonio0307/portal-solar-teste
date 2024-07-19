@@ -3,16 +3,16 @@
 require 'rails_helper'
 
 RSpec.describe PortalSolarGateway do
-  describe '.find_generators' do
+  describe '.get_generators' do
     context 'when the request is successful' do
-      let(:response) { double(body: '{"generators": []}', status: 200) }
+      let(:response) { double(Faraday::Response) }
 
       before do
         allow(HttpAdapter).to receive(:get).and_return(response)
       end
 
       it 'returns the generators' do
-        expect(described_class.find_generators(power: 100)).to eq('{"generators": []}')
+        expect(described_class.get_generators(page: 1, page_size: 50)).to eq(response)
       end
     end
 
@@ -22,7 +22,7 @@ RSpec.describe PortalSolarGateway do
       end
 
       it 'returns nil' do
-        expect(described_class.find_generators(power: 100)).to be_nil
+        expect(described_class.get_generators(page: 1, page_size: 50)).to be_nil
       end
     end
   end
