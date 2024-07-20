@@ -1,3 +1,5 @@
+# portal-api
+
 ./portal-api/.bundle
 
 /portal-api/db/*.sqlite3
@@ -12,3 +14,27 @@
 /portal-api/.byebug_history
 
 /portal-api/config/master.key
+
+# portal-app
+
+/portal-app/node_modules
+/portal-app/.pnp
+/portal-app/.pnp.js
+
+/portal-app/coverage
+
+/portal-app/.next/
+/portal-app/out/
+
+/portal-app/build
+
+/portal-app/.DS_Store
+
+/portal-app/npm-debug.log*
+/portal-app/yarn-debug.log*
+/portal-app/yarn-error.log*
+
+/portal-app/.env.local
+/portal-app/.env.development.local
+/portal-app/.env.test.local
+/portal-app/.env.production.local

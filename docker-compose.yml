@@ -12,6 +12,16 @@ services:
       - db
     command: bash -c 'rails s -b 0.0.0.0 -p 3001'
 
+  web:
+    build: ./portal-app
+    ports:
+      - 3000:3000
+    volumes:
+      - ./portal-app:/app
+    environment:
+      - NODE_ENV=development
+    command: npm run dev
+
   db:
     image: postgres:16.0
     env_file: '.env.development'
