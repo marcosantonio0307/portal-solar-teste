@@ -1,7 +1,17 @@
 import styles from './Layout.module.css';
 import Head from 'next/head';
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/router';
 
 const Layout = ({ children }) => {
+  const router = useRouter();
+
+  const logout = () => {
+    Cookies.remove('userName')
+    Cookies.remove('token');
+    router.push('/sign_in');
+  };
+
   return (
     <>
     <Head>
@@ -14,11 +24,21 @@ const Layout = ({ children }) => {
     </Head>
     <div>
       <header className={styles.navbar}>
-        <nav>
-          <ul>
-            <li><a href="/">Página Inicial</a></li>
+      <nav className='navbar navbar-expand-lg'>
+        <div className='collapse navbar-collapse'>
+          <ul className='navbar-nav mr-auto'>
+            <li className='nav-item'>
+              <a className='nav-link' href='/'>Início</a>
+            </li>
+            <li className='nav-item'>
+              <a className='nav-link' href='/user'>Minha conta</a>
+            </li>
           </ul>
-        </nav>
+          <div>
+            <button onClick={logout} className='btn btn-outline-danger my-2 my-sm-0'>Sair</button>
+          </div>
+        </div>
+      </nav>
       </header>
       <main className='p-5'>{children}</main>
     </div>

@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import portaApiGateway from '../lib/portal-api-gateway';
 import { useRouter } from 'next/router';
 import cookies from 'next-cookies';
-import Cookies from 'js-cookie';
 import moment from 'moment';
 
 const Home = ({ token, userName }) => {
@@ -25,12 +24,6 @@ const Home = ({ token, userName }) => {
     }
   }, [token]);
 
-  const handleLogout = () => {
-    Cookies.remove('userName')
-    Cookies.remove('token');
-    router.push('/sign_in');
-  };
-
   const navigateToSimulationPage = (id) => {
     router.push(`/simulations/${encodeURIComponent(id)}`);
   };
@@ -40,12 +33,11 @@ const Home = ({ token, userName }) => {
   return (
     <div>
       <div>Bem-vindo, {userName}!</div>
-      <button onClick={handleLogout}>Logout</button>
 
-      <div>
+      <div className='mt-3'>
         <h2>Minhas simulações</h2>
 
-        <table className='table'>
+        <table className='table mt-5'>
           <thead>
             <tr>
               <th>Id</th>
