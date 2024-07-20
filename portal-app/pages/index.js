@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
-import axios from '../lib/axios';
+import portaApiGateway from '../lib/portal-api-gateway';
 import { useRouter } from 'next/router';
 import cookies from 'next-cookies';
 import Cookies from 'js-cookie';
+import moment from 'moment';
 
 const Home = ({ token, userName }) => {
   const [data, setData] = useState(null);
   const router = useRouter();
-  console.log(userName)
 
   useEffect(() => {
     if (!token) {
       router.push('/sign_in');
     } else {
-      axios.get('/api/v1/customers/1')
+      portaApiGateway.get('/api/v1/simulations/')
         .then(response => setData(response.data))
         .catch(error => {
           if (error.response && error.response.status === 401) {
@@ -31,12 +31,45 @@ const Home = ({ token, userName }) => {
     router.push('/sign_in');
   };
 
+  const navigateToSimulationPage = (id) => {
+    router.push(`/simulations/${encodeURIComponent(id)}`);
+  };
+
   if (!data) return <p>Loading...</p>;
 
   return (
     <div>
-      <div>Bem-vindo, {userName} usuário autenticado!</div>
+      <div>Bem-vindo, {userName}!</div>
       <button onClick={handleLogout}>Logout</button>
+
+      <div>
+        <h2>Minhas simulações</h2>
+
+        <table className='table'>
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Data</th>
+              <th>Valor da Conta de Luz</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.simulations.map(simulation => (
+              <tr key={simulation.id}>
+                <td>{simulation.id}</td>
+                <td>{moment(simulation.created_at).format('DD/MM/YYYY')}</td>
+                <td>R$ {simulation.electricity_bill}</td>
+                <td>
+                  <button onClick={() => navigateToSimulationPage(simulation.id)} className='btn btn-primary'>
+                    Visualizar
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from '../lib/axios';
+import portaApiGateway from '../lib/portal-api-gateway';
 import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
 
@@ -11,10 +11,9 @@ const SignIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/v1/customer/sign_in', { email, password });
+      const response = await portaApiGateway.post('/api/v1/customer/sign_in', { email, password });
       if (response.status === 200) {
         const name = response.data.data['name'];
-        console.log(name)
         Cookies.set('userName', name);
         router.push('/');
       }
