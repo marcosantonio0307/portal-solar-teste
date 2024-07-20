@@ -39,7 +39,7 @@ describe 'Simulations API' do
 
   path '/api/v1/simulations' do
     get 'Retrieves simulations' do
-      tags 'Customers'
+      tags 'Simulations'
       produces 'application/json'
       security [auth_token: []]
 

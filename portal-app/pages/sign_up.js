@@ -4,45 +4,52 @@ import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
 import Link from 'next/link';
 
-const SignIn = () => {
+const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [apiError, setApiError] = useState(null);
+  const [name, setName] = useState('');
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await portaApiGateway.post('/api/v1/customer/sign_in', { email, password });
+      const response = await portaApiGateway.post('/api/v1/customer/', { email, password, name });
       if (response.status === 200) {
         const name = response.data.data['name'];
         Cookies.set('userName', name);
         router.push('/');
       }
     } catch (error) {
-      if (error.response && error.response.status === 401) {
-        setApiError('Usuário ou senha inválido. Tente novamente.');
-      }
-      console.error('Failed to sign in', error);
+      console.error('Failed to sign up', error);
     }
   };
 
   return (
     <div className='sm-container d-flex justify-content-center mt-5'>
       <form onSubmit={handleSubmit}>
-        {
-          apiError &&
-          <div className='alert alert-danger alert-dismissible position-absolute'>
-            {apiError}
-          </div>
-        }
-        <div>
-          <h4 className='mb-5 text-center'>Acesse sua conta</h4>
+        <h4 className='mb-5 text-center'>Crie sua conta</h4>
+        <div className='form-group'>
+          <label>
+            Nome:
+            <input
+              type='text'
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className='form-control'
+              required
+            />
+          </label>
         </div>
         <div className='form-group'>
           <label>
             Email:
-            <input type='email' value={email} onChange={(e) => setEmail(e.target.value)} className='form-control' />
+            <input
+              type='email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className='form-control'
+              required
+            />
           </label>
         </div>
         <div className='form-group'>
@@ -53,18 +60,19 @@ const SignIn = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className='form-control'
+              required
             />
           </label>
         </div>
         <div className='form-group text-center'>
-          <button type='submit' className='btn btn-success'>Entrar</button>
+          <button type='submit' className='btn btn-success'>Criar conta</button>
         </div>
         <div className='text-center'>
-          <Link href='/sign_up'>Novo por aqui? Crie sua conta</Link>
+          <Link href='/sign_in'>Voltar a tela de login</Link>
         </div>
       </form>
     </div>
   );
 };
 
-export default SignIn;
+export default SignUp;

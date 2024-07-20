@@ -262,7 +262,7 @@ paths:
     get:
       summary: Retrieves simulations
       tags:
-      - Customers
+      - Simulations
       security:
       - auth_token: []
       parameters:
