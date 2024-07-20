@@ -17,14 +17,12 @@ class PopulatePowerGeneratorsUseCase
 
   def call
     (1..@total_pages).each do |page|
-      Rails.logger.info("***** Creating generators from API page #{page}...")
-
       response = @power_generators_gateway.get_generators(page: page, page_size: @page_size)
 
       generators = filter_uniq_generators(response)
 
       generators.each do |generator|
-        power_generator = PowerGenerator.create(
+        PowerGenerator.create(
           uuid: generator['id'],
           name: generator['name'],
           price: generator['price'].to_i,
@@ -32,13 +30,7 @@ class PopulatePowerGeneratorsUseCase
           power: generator['power'].to_f,
           image_url: generator['image']
         )
-
-        if power_generator.errors.any?
-          Rails.logger.info("***** Error to create generator: #{power_generator.errors.full_messages.join(', ')}")
-        end
       end
-
-      Rails.logger.info("***** Finish create generators from API page #{page}")
     end
   end
 

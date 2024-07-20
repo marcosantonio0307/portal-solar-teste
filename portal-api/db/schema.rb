@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_07_17_174313) do
+ActiveRecord::Schema.define(version: 2024_07_19_210712) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "chosen_generators", force: :cascade do |t|
+    t.bigint "simulation_id", null: false
+    t.string "uuid", null: false
+    t.string "name", null: false
+    t.integer "price", null: false
+    t.integer "panels", null: false
+    t.float "power", null: false
+    t.string "image_url", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["simulation_id"], name: "index_chosen_generators_on_simulation_id"
+  end
 
   create_table "customers", force: :cascade do |t|
     t.string "provider", default: "email", null: false
@@ -49,6 +62,7 @@ ActiveRecord::Schema.define(version: 2024_07_17_174313) do
     t.string "image_url", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["power"], name: "index_power_generators_on_power"
     t.index ["uuid"], name: "index_power_generators_on_uuid", unique: true
   end
 
@@ -61,5 +75,6 @@ ActiveRecord::Schema.define(version: 2024_07_17_174313) do
     t.index ["customer_id"], name: "index_simulations_on_customer_id"
   end
 
+  add_foreign_key "chosen_generators", "simulations"
   add_foreign_key "simulations", "customers"
 end

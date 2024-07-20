@@ -1,6 +1,7 @@
-class CreatePowerGenerators < ActiveRecord::Migration[6.1]
+class CreateChosenGenerators < ActiveRecord::Migration[6.1]
   def change
-    create_table :power_generators do |t|
+    create_table :chosen_generators do |t|
+      t.references :simulation, null: false, foreign_key: true
       t.string :uuid, null: false
       t.string :name, null: false
       t.integer :price, null: false
@@ -10,8 +11,5 @@ class CreatePowerGenerators < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
-
-    add_index :power_generators, :uuid, unique: true
-    add_index :power_generators, :power
   end
 end

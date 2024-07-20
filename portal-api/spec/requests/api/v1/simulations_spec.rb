@@ -15,7 +15,22 @@ describe 'Simulations API' do
           power: { type: :number },
           created_at: { type: :string },
           updated_at: { type: :string },
-          self_link: { type: :string }
+          self_link: { type: :string },
+          chosen_generators: {
+            type: :array,
+            items: {
+              type: :object,
+              properties: {
+                id: { type: :integer },
+                uuid: { type: :string },
+                name: { type: :string },
+                price: { type: :number },
+                panels: { type: :integer },
+                power: { type: :number },
+                image_url: { type: :string }
+              }
+            }
+          }
         }
       }
     }
@@ -73,9 +88,7 @@ describe 'Simulations API' do
         run_test!
       end
     end
-  end
 
-  path '/api/v1/simulations' do
     post 'Creates a simulation' do
       tags 'Simulations'
       consumes 'application/json'

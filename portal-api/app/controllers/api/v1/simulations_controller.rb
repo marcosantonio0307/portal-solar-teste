@@ -16,6 +16,8 @@ module Api
         @simulation = CreateSimulationUseCase.call!(
           customer: @customer, electricity_bill: permitted_params[:electricity_bill]
         )
+
+        SelectBestPowerGeneratorsUseCase.call(simulation: @simulation)
       end
 
       def show

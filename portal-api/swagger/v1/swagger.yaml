@@ -326,6 +326,25 @@ paths:
                         type: string
                       self_link:
                         type: string
+                      chosen_generators:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            uuid:
+                              type: string
+                            name:
+                              type: string
+                            price:
+                              type: number
+                            panels:
+                              type: integer
+                            power:
+                              type: number
+                            image_url:
+                              type: string
         '422':
           description: invalid request
       requestBody:
@@ -376,6 +395,25 @@ paths:
                         type: string
                       self_link:
                         type: string
+                      chosen_generators:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                            uuid:
+                              type: string
+                            name:
+                              type: string
+                            price:
+                              type: number
+                            panels:
+                              type: integer
+                            power:
+                              type: number
+                            image_url:
+                              type: string
         '404':
           description: simulation not found
         '401':

@@ -6,4 +6,6 @@ class Simulation < ApplicationRecord
   validates :electricity_bill, presence: true
 
   scope :today, -> { where('created_at >= ?', Time.zone.now.beginning_of_day) }
+
+  has_many :chosen_generators, dependent: :destroy
 end
