@@ -14,7 +14,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :customers, only: %i[show update]
 
-      resources :simulations, only: %i[index create show]
+      resources :simulations, only: %i[index create show] do
+        get :download, on: :member
+      end
 
       namespace :internal do
         resources :simulations, only: %i[index show]

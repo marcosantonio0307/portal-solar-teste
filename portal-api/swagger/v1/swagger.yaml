@@ -231,6 +231,29 @@ paths:
                     type: string
                   updated_at:
                     type: string
+                  self_link:
+                    type: string
+                  download_link:
+                    type: string
+                  chosen_generators:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        uuid:
+                          type: string
+                        name:
+                          type: string
+                        price:
+                          type: number
+                        panels:
+                          type: integer
+                        power:
+                          type: number
+                        image_url:
+                          type: string
         '401':
           description: unauthorized
         '404':
@@ -326,6 +349,8 @@ paths:
                         type: string
                       self_link:
                         type: string
+                      download_link:
+                        type: string
                       chosen_generators:
                         type: array
                         items:
@@ -395,6 +420,8 @@ paths:
                         type: string
                       self_link:
                         type: string
+                      download_link:
+                        type: string
                       chosen_generators:
                         type: array
                         items:
@@ -414,6 +441,26 @@ paths:
                               type: number
                             image_url:
                               type: string
+        '404':
+          description: simulation not found
+        '401':
+          description: unauthorized
+  "/api/v1/simulations/{id}/download":
+    get:
+      summary: Downloads a simulation as PDF
+      tags:
+      - Simulations
+      security:
+      - auth_token: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: simulation downloaded
         '404':
           description: simulation not found
         '401':

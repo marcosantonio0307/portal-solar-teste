@@ -16,6 +16,7 @@ describe 'Simulations API' do
           created_at: { type: :string },
           updated_at: { type: :string },
           self_link: { type: :string },
+          download_link: { type: :string },
           chosen_generators: {
             type: :array,
             items: {
@@ -139,6 +140,36 @@ describe 'Simulations API' do
       response '200', 'simulation found' do
         schema simulation_schema
 
+        run_test!
+      end
+
+      response '404', 'simulation not found' do
+        let(:id) { 'invalid' }
+
+        run_test!
+      end
+
+      response '401', 'unauthorized' do
+        let('Authorization') { 'invalid' }
+
+        run_test!
+      end
+    end
+  end
+
+  path '/api/v1/simulations/{id}/download' do
+    get 'Downloads a simulation as PDF' do
+      tags 'Simulations'
+      produces 'application/pdf'
+      security [auth_token: []]
+
+      parameter name: :id, in: :path, type: :integer
+
+      let(:customer) { create(:customer) }
+      let('Authorization') { customer.create_new_auth_token['Authorization'] }
+      let(:id) { create(:simulation, customer: customer).id }
+
+      response '200', 'simulation downloaded' do
         run_test!
       end
 

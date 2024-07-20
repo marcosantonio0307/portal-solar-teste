@@ -74,7 +74,24 @@ describe 'Internal Simulations API' do
             electricity_bill: { type: :number },
             power: { type: :number },
             created_at: { type: :string },
-            updated_at: { type: :string }
+            updated_at: { type: :string },
+            self_link: { type: :string },
+            download_link: { type: :string },
+            chosen_generators: {
+              type: :array,
+              items: {
+                type: :object,
+                properties: {
+                  id: { type: :integer },
+                  uuid: { type: :string },
+                  name: { type: :string },
+                  price: { type: :number },
+                  panels: { type: :integer },
+                  power: { type: :number },
+                  image_url: { type: :string }
+                }
+              }
+            }
           }
         )
 

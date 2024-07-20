@@ -1,0 +1,28 @@
+<header>
+  <title>Simulação id: <%= @simulation.id %></title>
+  <meta charset='utf-8' />
+</header>
+
+<body>
+  <div>
+    <h1 align="center">Simulação Nº <%= @simulation.id %></h1>
+
+    <h3>Nome: <%= @simulation.customer.name %></h3>
+    <h3>Data: <%= @simulation.created_at.strftime('%d/%m/%Y') %></h3>
+    <h3>Valor da conta de luz: <%= number_to_currency @simulation.electricity_bill %></h3>
+    <h3>Potência necessária: <%= @simulation.power.truncate(2) %></h3>
+  </div>
+
+  <div>
+    <h2 align="center">Geradores mais indicados</h2>
+
+    <% @simulation.chosen_generators.each do |generator| %>
+      <p><b><%= generator.name %></b></p>
+      <p><b>Preço:</b> <%= number_to_currency generator.price_in_money %></p>
+      <p><b>Qtde. de painéis:</b> <%= generator.panels %></p>
+      <p><b>Potência do gerador:</b> <%= generator.power.truncate(2) %></p>
+      <p><img src="<%= generator.image_url %>" width="100px"></p>
+      <br>
+    <% end %>
+  </div>
+</body>
