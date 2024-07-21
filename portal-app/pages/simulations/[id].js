@@ -44,7 +44,7 @@ const SimulationPage = ({token}) => {
         
         <div className='mt-5'>
           {simulation.chosen_generators.map(generator => (
-            <div className='mt-5 pb-3 border-bottom'>
+            <div className='mt-5 pb-3 border-bottom' key={generator.id}>
               <p><b>{ generator.name }</b></p>
               <p><b>Preço:</b> { generator.price }</p>
               <p><b>Qtde. de painéis:</b> { generator.panels }</p>

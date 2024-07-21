@@ -3,6 +3,7 @@ import portaApiGateway from '../lib/portal-api-gateway';
 import { useRouter } from 'next/router';
 import cookies from 'next-cookies';
 import moment from 'moment';
+import Link from 'next/link';
 
 const Home = ({ token, userName }) => {
   const [data, setData] = useState(null);
@@ -36,6 +37,7 @@ const Home = ({ token, userName }) => {
 
       <div className='mt-3'>
         <h2>Minhas simulações</h2>
+        <Link href='/simulations/new' className='btn btn-success'>Nova Simulação</Link>
 
         <table className='table mt-5'>
           <thead>
