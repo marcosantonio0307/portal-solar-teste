@@ -5,6 +5,7 @@ import portalApiGateway from '../../lib/portal-api-gateway';
 
 const NewSimulationPage = ({ token }) => {
   const [electricity_bill, setElectricityBill] = useState('');
+  const [apiError, setApiError] = useState(null)
   const router = useRouter();
 
   const handleSubmit = async (e) => {
@@ -16,6 +17,9 @@ const NewSimulationPage = ({ token }) => {
         router.push(`/simulations/${simulationId}`);
       }
     } catch (error) {
+      if (error.response && error.response.status === 422) {
+        setApiError('Limite de Simulações diárias excedido');
+      }
       console.error('Failed to create a simulation', error);
     }
   };
@@ -28,6 +32,12 @@ const NewSimulationPage = ({ token }) => {
 
   return (
     <div className='sm-container d-flex justify-content-center mt-5'>
+      {
+        apiError &&
+        <div className='alert alert-danger alert-dismissible position-absolute'>
+          {apiError}
+        </div>
+      }
       <form onSubmit={handleSubmit}>
         <h4 className='mb-5 text-center'>Nova simulação</h4>
         <div className='form-group'>
