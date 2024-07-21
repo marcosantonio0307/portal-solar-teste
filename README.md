@@ -33,24 +33,24 @@ cd portal-solar-teste
 
 3. Faça o build dos containers:
 ```bash
-docker-compose build
+docker compose build
 ```
 
 4. Crie o banco de dados da API e rode as migrações:
 ```bash
-docker-compose run app rails db:create db:migrate
+docker compose run app rails db:create db:migrate
 ```
 5. IMPORTANTE! edite a ENV 'PORTAL_SOLAR_KEY' no `.env.development` para o valor real da key
 da API mokaroo para rodar o seed corretamente.
 
 6. Com a ENV configurada rode o seed para popular a tabela de geradores disponíveis. Esse passo demora um poquinho.
 ```bash
-docker-compose run app rails db:seed
+docker compose run app rails db:seed
 ```
 
 7. Inicie a aplicação:
 ```bash
-docker-compose up
+docker compose up
 ```
 8. Acesse a aplicação no seu navegador:
 - API: http://localhost:3001 (para testar requisições)
@@ -63,7 +63,7 @@ garantir seu funcionamento.
 
 - Para rodar os testes da API, execute:
 ```bash
-docker-compose run app rspec
+docker compose run app rspec
 ```
 ### Teste os endpoints da API
 
@@ -79,5 +79,5 @@ dos padrões de estilo do Ruby.
 
 Execute o Rubocop:
 ```bash
-docker-compose run app rubocop
+docker compose run app rubocop
 ```
