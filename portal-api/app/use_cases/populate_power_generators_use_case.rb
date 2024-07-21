@@ -17,6 +17,8 @@ class PopulatePowerGeneratorsUseCase
 
   def call
     (1..@total_pages).each do |page|
+      puts "Creating generators from page #{page}..."
+
       response = @power_generators_gateway.get_generators(page: page, page_size: @page_size)
 
       generators = filter_uniq_generators(response)
@@ -31,6 +33,8 @@ class PopulatePowerGeneratorsUseCase
           image_url: generator['image']
         )
       end
+
+      puts "Generators from page #{page} created! \n"
     end
   end
 

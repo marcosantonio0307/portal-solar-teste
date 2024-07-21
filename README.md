@@ -40,16 +40,19 @@ docker-compose build
 ```bash
 docker-compose run app rails db:create db:migrate
 ```
-5. Rode o seed para popular a tabela de geradores disponíveis. Esse passo demora um poquinho.
+5. IMPORTANTE! edite a ENV 'PORTAL_SOLAR_KEY' no `.env.development` para o valor real da key
+da API mokaroo para rodar o seed corretamente.
+
+6. Com a ENV configurada rode o seed para popular a tabela de geradores disponíveis. Esse passo demora um poquinho.
 ```bash
 docker-compose run app rails db:seed
 ```
 
-6. Inicie a aplicação:
+7. Inicie a aplicação:
 ```bash
 docker-compose up
 ```
-7. Acesse a aplicação no seu navegador:
+8. Acesse a aplicação no seu navegador:
 - API: http://localhost:3001 (para testar requisições)
 - Painel: http://localhost:3000 (para acessar o painel do usuário)
 

@@ -38,4 +38,8 @@ Layout/LineLength:
 
 Style/ClassAndModuleChildren:
   Enabled: false
+
+Rails/Output:
+  Exclude:
+    - 'app/use_cases/**/*'
   
