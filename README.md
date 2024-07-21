@@ -38,11 +38,11 @@ docker-compose build
 
 4. Crie o banco de dados da API e rode as migrações:
 ```bash
-docker-compose run app bundle exec rails db:create db:migrate
+docker-compose run app rails db:create db:migrate
 ```
 5. Rode o seed para popular a tabela de geradores disponíveis. Esse passo demora um poquinho.
 ```bash
-docker-compose run app bundle exec rails db:seed
+docker-compose run app rails db:seed
 ```
 
 6. Inicie a aplicação:
@@ -60,7 +60,7 @@ garantir seu funcionamento.
 
 - Para rodar os testes da API, execute:
 ```bash
-docker-compose run app bundle exec rspec
+docker-compose run app rspec
 ```
 ### Teste os endpoints da API
 
@@ -76,5 +76,5 @@ dos padrões de estilo do Ruby.
 
 Execute o Rubocop:
 ```bash
-docker-compose run app bundle exec rubocop
+docker-compose run app rubocop
 ```
