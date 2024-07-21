@@ -16,7 +16,9 @@ const SignUp = () => {
       const response = await portaApiGateway.post('/api/v1/customer/', { email, password, name });
       if (response.status === 200) {
         const name = response.data.data['name'];
+        const id = response.data.data['id'];
         Cookies.set('userName', name);
+        Cookies.set('userId', id);
         router.push('/');
       }
     } catch (error) {

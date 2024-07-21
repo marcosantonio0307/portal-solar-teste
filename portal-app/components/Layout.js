@@ -7,7 +7,8 @@ const Layout = ({ children }) => {
   const router = useRouter();
 
   const logout = () => {
-    Cookies.remove('userName')
+    Cookies.remove('userName');
+    Cookies.remove('userId');
     Cookies.remove('token');
     router.push('/sign_in');
   };

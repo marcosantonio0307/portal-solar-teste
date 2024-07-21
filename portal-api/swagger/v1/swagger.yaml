@@ -143,6 +143,9 @@ paths:
                   type: string
                 email:
                   type: string
+                password:
+                  type: string
+                  required: false
   "/api/v1/internal/simulations":
     get:
       summary: Retrieves simulations

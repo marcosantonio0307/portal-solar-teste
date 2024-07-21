@@ -191,7 +191,8 @@ describe 'Customers API' do
         type: :object,
         properties: {
           name: { type: :string },
-          email: { type: :string }
+          email: { type: :string },
+          password: { type: :string, required: false }
         }
       }
 
