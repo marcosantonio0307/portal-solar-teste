@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import portaApiGateway from '../lib/portal-api-gateway';
+import portalApiGateway from '../lib/portal-api-gateway';
 import { useRouter } from 'next/router';
 import cookies from 'next-cookies';
 import moment from 'moment';
@@ -13,7 +13,7 @@ const Home = ({ token, userName }) => {
     if (!token) {
       router.push('/sign_in');
     } else {
-      portaApiGateway.get('/api/v1/simulations/')
+      portalApiGateway.get('/api/v1/simulations/')
         .then(response => setData(response.data))
         .catch(error => {
           if (error.response && error.response.status === 401) {

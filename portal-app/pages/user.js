@@ -1,4 +1,4 @@
-import portaApiGateway from '../lib/portal-api-gateway';
+import portalApiGateway from '../lib/portal-api-gateway';
 import cookies from 'next-cookies';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router'
@@ -22,7 +22,7 @@ const UserPage = ({token, userId}) => {
     }
 
     try {
-      const response = await portaApiGateway.put(`/api/v1/customers/${userId}`, dataParams);
+      const response = await portalApiGateway.put(`/api/v1/customers/${userId}`, dataParams);
       if (response.status === 200) {
         const userName = response.data.customer['name'];
         Cookies.set('userName', userName);
@@ -40,7 +40,7 @@ const UserPage = ({token, userId}) => {
       e.preventDefault();
 
       try {
-        const response = await portaApiGateway.delete('/api/v1/customer');
+        const response = await portalApiGateway.delete('/api/v1/customer');
         if (response.status === 200) {
           Cookies.remove('userName');
           Cookies.remove('userId');
@@ -57,7 +57,7 @@ const UserPage = ({token, userId}) => {
     if (!token) {
       router.push('/sign_in');
     } else {
-      portaApiGateway.get(`/api/v1/customers/${userId}`)
+      portalApiGateway.get(`/api/v1/customers/${userId}`)
         .then(response => {
           setUser(response.data.customer);
           setName(response.data.customer.name);

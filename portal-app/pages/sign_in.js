@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import portaApiGateway from '../lib/portal-api-gateway';
+import portalApiGateway from '../lib/portal-api-gateway';
 import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
 import Link from 'next/link';
@@ -13,7 +13,7 @@ const SignIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await portaApiGateway.post('/api/v1/customer/sign_in', { email, password });
+      const response = await portalApiGateway.post('/api/v1/customer/sign_in', { email, password });
       if (response.status === 200) {
         const name = response.data.data['name'];
         const id = response.data.data['id']

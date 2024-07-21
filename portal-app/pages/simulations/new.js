@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import cookies from 'next-cookies';
-import portaApiGateway from '../../lib/portal-api-gateway';
+import portalApiGateway from '../../lib/portal-api-gateway';
 
 const NewSimulationPage = ({ token }) => {
   const [electricity_bill, setElectricityBill] = useState('');
@@ -10,7 +10,7 @@ const NewSimulationPage = ({ token }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await portaApiGateway.post('/api/v1/simulations/', { electricity_bill });
+      const response = await portalApiGateway.post('/api/v1/simulations/', { electricity_bill });
       if (response.status === 200) {
         const simulationId = response.data.simulation['id'];
         router.push(`/simulations/${simulationId}`);
